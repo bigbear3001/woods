@@ -10,7 +10,11 @@
     "parameters": {
       "direction": "north"
     },
-    "contexts": [],
+    "contexts": [
+      {"name": "actions_capability_screen_output", "parameters": {"debug": "debug", "direction.original": "north", "debug.original": "debug", "direction": "north"}, "lifespan":0},
+      {"name": "actions_capability_audio_output", "parameters": {"debug": "debug", "direction.original": "north", "debug.original": "debug", "direction": "north"}, "lifespan":0},
+      {"name": "google_assistant_input_type_keyboard", "parameters": {"debug": "debug", "direction.original": "north", "debug.original": "debug", "direction": "north"}, "lifespan":0}
+    ],
     "resolvedQuery": "my name is Ana and I live in Rome",
     "source": "agent",
     "score": 1.0,

@@ -8,6 +8,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Objects;
+
 @Component
 @Slf4j
 @RequiredArgsConstructor
@@ -38,9 +42,21 @@ public class MoveAction extends ActionWithState {
         }
 
         FulfillmentResponse response = new FulfillmentResponse();
-        response.setSpeech("You're at " + position);
-        response.setDisplayText("You're at " + position);
+        String speech = "You walked a bit " + direction;
+        if (userHasDebugFlag(request)) {
+            speech += ". You are currently at " + position;
+        }
+        response.setSpeech(speech);
+        response.setDisplayText(speech);
         response.setContextOut(new Object[]{stateHolder.getState(request.getSessionId())});
         return response;
+    }
+
+    private boolean userHasDebugFlag(FulfillmentRequest request) {
+        return Arrays.stream(request.getResult().getContexts())
+                .filter(Objects::nonNull)
+                .map((object) -> ((Map<String, Object>) object).get("parameters"))
+                .filter(Objects::nonNull)
+                .anyMatch((parameters) -> ((Map<String, Object>) parameters).containsKey("debug"));
     }
 }
