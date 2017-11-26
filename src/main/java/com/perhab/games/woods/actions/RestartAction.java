@@ -16,9 +16,6 @@ public class RestartAction implements Action {
     public FulfillmentResponse perform(FulfillmentRequest request) {
         stateHolder.resetState(request.getSessionId());
 
-        FulfillmentResponse response = new FulfillmentResponse();
-        response.setSpeech(request.getResult().getSpeech());
-        response.setDisplayText(request.getResult().getSpeech());
-        return response;
+        return null;
     }
 }
