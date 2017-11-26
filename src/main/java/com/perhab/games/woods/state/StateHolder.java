@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
+import java.util.Map;
 
 @Component
 @Slf4j
@@ -25,14 +26,4 @@ public class StateHolder {
         states.put(sessionId, new State());
     }
 
-    public String[] provideStateForResponse(String sessionId) {
-        StringWriter stringWriter = new StringWriter();
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            objectMapper.writeValue(stringWriter, states.get(sessionId));
-        } catch (IOException e) {
-            log.error("Error while providing state for response", e);
-        }
-        return new String[]{stringWriter.toString()};
-    }
 }

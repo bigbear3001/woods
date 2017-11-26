@@ -40,7 +40,7 @@ public class MoveAction extends ActionWithState {
         FulfillmentResponse response = new FulfillmentResponse();
         response.setSpeech("You're at " + position);
         response.setDisplayText("You're at " + position);
-        response.setContextOut(stateHolder.provideStateForResponse(request.getSessionId()));
+        response.setContextOut(new Object[]{stateHolder.getState(request.getSessionId())});
         return response;
     }
 }
