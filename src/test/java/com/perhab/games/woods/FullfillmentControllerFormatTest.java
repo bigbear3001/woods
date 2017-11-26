@@ -6,7 +6,7 @@ import org.mockito.Mock;
 public class FullfillmentControllerFormatTest {
 
     @Mock
-    FullfillmentController controller;
+    FulfillmentController controller;
 
     @Test
     public void testController() {
