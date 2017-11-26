@@ -11,7 +11,10 @@ public class FulfillmentController {
     @RequestMapping("/fullfillment")
     public FulfillmentResponse fullfillment(@RequestBody FulfillmentRequest request) {
         log.error("Got request {}", request);
-        FulfillmentResponse response = null;
+        FulfillmentResponse response = new FulfillmentResponse();
+        response.setSpeech("Uh Oh");
+        response.setDisplayText("Well, this is awkward ;-)");
+        response.setSource("game.perhab.com");
         log.error("sending response {}", response);
         return response;
     }
