@@ -19,6 +19,8 @@ public class MoveAction extends ActionWithState {
 
     private final StateHolder stateHolder;
 
+    private final LookAroundAction lookAroundAction;
+
     @Override
     public FulfillmentResponse perform(FulfillmentRequest request) {
         Position position = getState(request).getPosition();
@@ -41,22 +43,26 @@ public class MoveAction extends ActionWithState {
                 break;
         }
 
-        FulfillmentResponse response = new FulfillmentResponse();
-        String speech = "You walked a bit " + direction;
-        if (userHasDebugFlag(request)) {
-            speech += ". You are currently at " + position;
+        if (userHasFlag(request, "autolookarround")) {
+            return lookAroundAction.perform(request);
+        } else {
+            FulfillmentResponse response = new FulfillmentResponse();
+            String speech = "You walked a bit " + direction;
+            if (userHasFlag(request, "debug")) {
+                speech += ". You are currently at " + position;
+            }
+            response.setSpeech(speech);
+            response.setDisplayText(speech);
+            response.setContextOut(new Object[]{stateHolder.getState(request.getSessionId())});
+            return response;
         }
-        response.setSpeech(speech);
-        response.setDisplayText(speech);
-        response.setContextOut(new Object[]{stateHolder.getState(request.getSessionId())});
-        return response;
     }
 
-    private boolean userHasDebugFlag(FulfillmentRequest request) {
+    private boolean userHasFlag(FulfillmentRequest request, String flag) {
         return Arrays.stream(request.getResult().getContexts())
                 .filter(Objects::nonNull)
                 .map((object) -> ((Map<String, Object>) object).get("parameters"))
                 .filter(Objects::nonNull)
-                .anyMatch((parameters) -> ((Map<String, Object>) parameters).containsKey("debug"));
+                .anyMatch((parameters) -> ((Map<String, Object>) parameters).containsKey(flag));
     }
 }
