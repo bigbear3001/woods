@@ -1,8 +1,7 @@
-package com.perhab.games.woods;
+package com.perhab.games.woods.response;
 
+import com.perhab.games.woods.response.FollowUpEvent;
 import lombok.Data;
-
-import java.util.Map;
 
 /**
  * @link https://dialogflow.com/docs/fulfillment#response
@@ -14,5 +13,5 @@ public class FulfillmentResponse {
     Object data;
     Object[] contextOut;
     String source = "game.perhab.com";
-    Object followUpEvent;
+    FollowUpEvent followUpEvent;
 }

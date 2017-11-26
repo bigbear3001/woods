@@ -4,6 +4,7 @@ import com.perhab.games.woods.actions.LookAroundAction;
 import com.perhab.games.woods.actions.MoveAction;
 import com.perhab.games.woods.actions.RestartAction;
 import com.perhab.games.woods.request.FulfillmentRequest;
+import com.perhab.games.woods.response.FulfillmentResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;

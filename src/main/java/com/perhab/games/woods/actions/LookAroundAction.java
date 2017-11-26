@@ -1,6 +1,6 @@
 package com.perhab.games.woods.actions;
 
-import com.perhab.games.woods.FulfillmentResponse;
+import com.perhab.games.woods.response.FulfillmentResponse;
 import com.perhab.games.woods.items.Item;
 import com.perhab.games.woods.map.Map;
 import com.perhab.games.woods.request.FulfillmentRequest;
