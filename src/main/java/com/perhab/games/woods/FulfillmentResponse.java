@@ -10,7 +10,7 @@ public class FulfillmentResponse {
     String speech;
     String displayText;
     Object data;
-    Object[] contextOut;
+    String[] contextOut;
     String source = "game.perhab.com";
     Object followUpEvent;
 }

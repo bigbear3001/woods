@@ -3,23 +3,21 @@ package com.perhab.games.woods.actions;
 import com.perhab.games.woods.FulfillmentResponse;
 import com.perhab.games.woods.dto.Position;
 import com.perhab.games.woods.request.FulfillmentRequest;
+import com.perhab.games.woods.state.StateHolder;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-
 @Component
 @Slf4j
-public class MoveAction implements Action {
+@RequiredArgsConstructor
+public class MoveAction extends ActionWithState {
 
-    HashMap<String, Position> positions = new HashMap<>();
+    private final StateHolder stateHolder;
 
     @Override
     public FulfillmentResponse perform(FulfillmentRequest request) {
-        if (!positions.containsKey(request.getSessionId())) {
-            positions.put(request.getSessionId(), new Position());
-        }
-        Position position = positions.get(request.getSessionId());
+        Position position = getState(request).getPosition();
         String direction = (String) request.getResult().getParameters().get("direction");
         switch (direction) {
             case "north":
@@ -42,7 +40,7 @@ public class MoveAction implements Action {
         FulfillmentResponse response = new FulfillmentResponse();
         response.setSpeech("You're at " + position);
         response.setDisplayText("You're at " + position);
-        response.setContextOut(new Object[]{position});
+        response.setContextOut(stateHolder.provideStateForResponse(request.getSessionId()));
         return response;
     }
 }

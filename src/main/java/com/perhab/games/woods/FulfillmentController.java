@@ -1,6 +1,7 @@
 package com.perhab.games.woods;
 
 import com.perhab.games.woods.actions.MoveAction;
+import com.perhab.games.woods.actions.RestartAction;
 import com.perhab.games.woods.request.FulfillmentRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class FulfillmentController {
 
     private final MoveAction moveAction;
+    private final RestartAction restartAction;
 
     @RequestMapping("/fulfillment")
     public FulfillmentResponse fullfillment(@RequestBody FulfillmentRequest request) {
@@ -23,6 +25,9 @@ public class FulfillmentController {
         switch (request.getResult().getAction()) {
             case "game.move":
                 response = moveAction.perform(request);
+                break;
+            case "game.start":
+                response = restartAction.perform(request);
                 break;
         }
 
