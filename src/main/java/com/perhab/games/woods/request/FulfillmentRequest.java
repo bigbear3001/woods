@@ -1,10 +1,9 @@
-package com.perhab.games.woods;
+package com.perhab.games.woods.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.Map;
 import java.util.UUID;
 
 @Data
@@ -17,42 +16,6 @@ public class FulfillmentRequest {
     Date timestamp;
     OriginalRequest originalRequest;
 
-    @Data
-    private static class Result {
-        String action;
-        boolean actionIncomplete;
-        String[] contexts;
-        Fulfillment fulfillment;
-        Metadata metadata;
-        Map<String, Object> parameters;
-        String resolvedQuery;
-        Float score;
-        String source;
-        String speech;
-    }
-
-    @Data
-    private static class Fulfillment {
-        Message[] messages;
-        String speech;
-
-    }
-
-    @Data
-    private static class Message {
-        String plattform;
-        String textToSpeech;
-        String type;
-        String speech;
-    }
-
-    @Data
-    private static class Metadata {
-        UUID intentId;
-        String intentName;
-        String webhookForSlotFillingUsed;
-        String webhookUsed;
-    }
 
     @Data
     private static class Status {
