@@ -42,6 +42,7 @@ public class MoveAction implements Action {
         FulfillmentResponse response = new FulfillmentResponse();
         response.setSpeech("You're at " + position);
         response.setDisplayText("You're at " + position);
+        response.setContextOut(new Object[]{position});
         return response;
     }
 }
