@@ -6,24 +6,42 @@ import com.perhab.games.woods.map.Map;
 import com.perhab.games.woods.request.FulfillmentRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class LookAroundAction extends ActionWithState {
 
     @Override
     public FulfillmentResponse perform(FulfillmentRequest request) {
-        StringBuilder builder = new StringBuilder("You see ");
-        boolean first = true;
-        for (Item item : Map.getItems(getState(request).getPosition())) {
-            if (first) {
-               first = false;
-            } else {
-                builder.append(" and ");
+        List<Item> items = Map.getItems(getState(request).getPosition());
+        String speech = buildSentenceWithItems("You see ", items);
+        FulfillmentResponse response = new FulfillmentResponse();
+        response.setSpeech(speech);
+        response.setDisplayText(speech);
+        return response;
+    }
+
+    public static String buildSentenceWithItems(String message, List<Item> items) {
+        return buildSentenceWithItems(message, items.toArray(new Item[items.size()]));
+    }
+
+    public static String buildSentenceWithItems(String message, Item ... items) {
+        StringBuilder builder = new StringBuilder(message);
+        if (!message.endsWith(" ")) {
+            builder.append(' ');
+        }
+        for (int i = 0 ; i < items.length; i++) {
+            Item item = items[i];
+            if (i != 0) {
+                if (i + 1 == items.length) {
+                    builder.append(" and ");
+                } else {
+                    builder.append(", ");
+                }
             }
             builder.append(item.describe());
         }
-        FulfillmentResponse response = new FulfillmentResponse();
-        response.setSpeech(builder.toString());
-        response.setDisplayText(builder.toString());
-        return response;
+        builder.append('.');
+        return builder.toString();
     }
 }
