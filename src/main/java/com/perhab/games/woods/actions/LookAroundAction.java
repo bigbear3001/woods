@@ -12,7 +12,13 @@ public class LookAroundAction extends ActionWithState {
     @Override
     public FulfillmentResponse perform(FulfillmentRequest request) {
         StringBuilder builder = new StringBuilder("You see ");
+        boolean first = true;
         for (Item item : Map.getItems(getState(request).getPosition())) {
+            if (first) {
+               first = false;
+            } else {
+                builder.append(" and ");
+            }
             builder.append(item.describe());
         }
         FulfillmentResponse response = new FulfillmentResponse();
