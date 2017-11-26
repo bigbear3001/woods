@@ -32,9 +32,10 @@ public class FulfillmentController {
         }
 
         if (response == null) {
+            log.debug("using default response");
             response = new FulfillmentResponse();
-            response.setSpeech("Uh Oh");
-            response.setDisplayText("Well, this is awkward ;-)");
+            response.setSpeech(request.getResult().getSpeech());
+            response.setDisplayText(request.getResult().getSpeech());
         }
         log.trace("sending response {}", response);
         return response;
