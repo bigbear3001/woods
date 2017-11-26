@@ -7,7 +7,7 @@ import com.perhab.games.woods.request.FulfillmentRequest;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DescribeAction extends ActionWithState {
+public class LookAroundAction extends ActionWithState {
 
     @Override
     public FulfillmentResponse perform(FulfillmentRequest request) {
