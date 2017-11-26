@@ -8,7 +8,7 @@ import java.util.Map;
 public class Result {
     String action;
     boolean actionIncomplete;
-    String[] contexts;
+    Object[] contexts;
     Fulfillment fulfillment;
     Metadata metadata;
     Map<String, Object> parameters;
