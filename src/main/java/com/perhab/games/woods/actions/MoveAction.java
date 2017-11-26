@@ -43,7 +43,7 @@ public class MoveAction extends ActionWithState {
                 break;
         }
 
-        if (userHasFlag(request, "autolookarround")) {
+        if (userHasFlag(request, "autolookaround")) {
             return lookAroundAction.perform(request);
         } else {
             FulfillmentResponse response = new FulfillmentResponse();
