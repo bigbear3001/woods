@@ -53,7 +53,7 @@ public class MoveAction extends ActionWithState {
             }
             response.setSpeech(speech);
             response.setDisplayText(speech);
-            response.setContextOut(new Object[]{stateHolder.getState(request.getSessionId())});
+            //response.setContextOut(new Object[]{stateHolder.getState(request.getSessionId())});
             return response;
         }
     }
