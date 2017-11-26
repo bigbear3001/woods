@@ -1,5 +1,6 @@
 package com.perhab.games.woods;
 
+import com.perhab.games.woods.actions.DescribeAction;
 import com.perhab.games.woods.actions.MoveAction;
 import com.perhab.games.woods.actions.RestartAction;
 import com.perhab.games.woods.request.FulfillmentRequest;
@@ -17,6 +18,7 @@ public class FulfillmentController {
 
     private final MoveAction moveAction;
     private final RestartAction restartAction;
+    private final DescribeAction describeAction;
 
     @RequestMapping("/fulfillment")
     public FulfillmentResponse fullfillment(@RequestBody FulfillmentRequest request) {
@@ -28,6 +30,9 @@ public class FulfillmentController {
                 break;
             case "game.start":
                 response = restartAction.perform(request);
+                break;
+            case "game.describe":
+                response = describeAction.perform(request);
                 break;
         }
 
