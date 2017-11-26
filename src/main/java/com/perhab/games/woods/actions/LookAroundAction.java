@@ -14,7 +14,13 @@ public class LookAroundAction extends ActionWithState {
     @Override
     public FulfillmentResponse perform(FulfillmentRequest request) {
         List<Item> items = Map.getItems(getState(request).getPosition());
-        String speech = buildSentenceWithItems("You see ", items);
+        String speech;
+        if (items.size() != 0) {
+            speech = buildSentenceWithItems("You see ", items);
+        } else {
+            speech = "There seems nothing interesting at this place.";
+        }
+
         FulfillmentResponse response = new FulfillmentResponse();
         response.setSpeech(speech);
         response.setDisplayText(speech);

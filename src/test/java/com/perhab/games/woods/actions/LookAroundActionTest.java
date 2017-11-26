@@ -1,4 +1,4 @@
-package com.perhab.games.woods.actions.com.perhab.games.woods.actions;
+package com.perhab.games.woods.actions;
 
 import com.perhab.games.woods.actions.LookAroundAction;
 import com.perhab.games.woods.items.BigRedApple;
