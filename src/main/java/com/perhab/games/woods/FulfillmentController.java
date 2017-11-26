@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 public class FulfillmentController {
-    @RequestMapping("/fullfillment")
+    @RequestMapping("/fulfillment")
     public FulfillmentResponse fullfillment(@RequestBody FulfillmentRequest request) {
         log.error("Got request {}", request);
         FulfillmentResponse response = new FulfillmentResponse();
